@@ -9,6 +9,8 @@ from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import ssd1306
 
+from PIL import ImageFont
+
 from debug_utils import debug_print
 
 # TODO: make this a singleton
@@ -31,10 +33,13 @@ class ScreenDisplay:
 
     # TODO: format long text to multi lines
     @debug_print
-    def show(self, msg):
+    def show(self, msg1='Moe', msg2='Happy Birthday!'):
+        font1 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 18)
+        font2 = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 14)
         with canvas(self.device_) as display:
             display.rectangle(self.device_.bounding_box, outline='white', fill='black')
-            display.text((10, 10), msg, fill='white')
+            display.text((55, 10), msg1, font=font1, fill='white')
+            display.text((5, 35), msg2, font=font2, fill='white')
 
     @debug_print
     def on(self):
@@ -47,12 +52,6 @@ class ScreenDisplay:
 """
 Test
 """
-"""
-dp = ScreenDisplay()
-dp.print('AAAAAAAAAAAAAAAAAA')
-time.sleep(3)
-dp.hide()
-time.sleep(3)
-dp.show()
-time.sleep(3)
-"""
+#dp = ScreenDisplay()
+#dp.show()
+#time.sleep(3)

@@ -37,5 +37,5 @@ printer = Printer()
 
 #printer.printText(u' 我想你'.encode('utf-8'))
 #printer.printText('111111111111111111111111111111111111111111111111111111111111111111111111111111111111')
-#printer.printText('I miss you\n')
-printer.printImage('img.png')
+printer.printText('I miss you\n')
+printer.printImage('../data/img/moe.jpeg')
