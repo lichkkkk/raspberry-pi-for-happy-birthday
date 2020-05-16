@@ -48,6 +48,7 @@ led.start()
 led.blink(5)
 led.close()
 
+# HTTP module is disabled
 """
 while True:
     while button.read() == 0:
@@ -58,7 +59,7 @@ while True:
       printer.printText(msg['text'], False)
     if msg['img'] != None:
       printer.printImage(msg['img'], True)
-    
+
     time.sleep(1)
     led.off()
 """

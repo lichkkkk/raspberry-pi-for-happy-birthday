@@ -5,9 +5,9 @@ from RPi import GPIO
 class Speaker:
 
   GPIO_PORT = 26
- 
+
   HappyBirthday = [
-    ('5', 0.5), ('5', 0.5), ('6', 1), ('5', 1), ('1^', 1), ('7', 2), 
+    ('5', 0.5), ('5', 0.5), ('6', 1), ('5', 1), ('1^', 1), ('7', 2),
     ('5', 0.5), ('5', 0.5), ('6', 1), ('5', 1), ('2^', 1), ('1^', 2),
     ('5', 0.5), ('5', 0.5), ('5^', 1), ('3^', 1), ('1^', 1), ('7', 1), ('6', 2),
     ('0', 2),
@@ -16,7 +16,7 @@ class Speaker:
   TestSong = [
     ('1', 1), ('1', 1), ('2', 0.5), ('2', 0.5)]
 
- 
+
   def start(self):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(self.GPIO_PORT, GPIO.OUT)
@@ -77,86 +77,3 @@ Test
 #s.start()
 #s.play(Speaker.HappyBirthday, 120)
 #s.close()
-
-"""
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(26, GPIO.OUT)
-init_freq = 440
-p = GPIO.PWM(26, init_freq)
-
-p.start(70)
-for i in range(5):
-  for x in range(200, 2200):
-    p.ChangeFrequency(x)
-    time.sleep(0.0001)
-p.stop()
-
-def pitch_to_freq(pitch):
-  HalfStep = 2 ** (1. / 12)
-  Step = HalfStep ** 2
-  A = 440.
-  B = A * Step
-  G = A / Step
-  F = G / Step
-  E = F / HalfStep
-  D = E / Step
-  C = D / Step
-  CC = B * HalfStep
-  DD = CC * Step
-  EE = DD * Step
-  FF = EE * HalfStep
-  GG = FF * Step
-  O = 1
-
-  PitchMap ={
-    '0': O, '1': C, '2': D, '3': E, '4': F,
-    '5': G, '6': A, '7': B, '1^': CC, '2^': DD,
-    '3^': EE, '4^': FF, '5^': GG}
-  if pitch not in PitchMap:
-    return O
-  return PitchMap[pitch]
-
-def test(speaker, song, beat):
-  BASE_LEN = 60. / beat
-  BREAK_LEN = BASE_LEN * 0.2
-  for pitch, length in song:
-    freq = pitch_to_freq(pitch)
-    sound_sec = BASE_LEN * length - BREAK_LEN
-    break_sec = BREAK_LEN
-    print pitch, length, freq, sound_sec, break_sec
-    speaker.start(50)
-    speaker.ChangeFrequency(freq)
-    time.sleep(sound_sec)
-    # insert a gap
-    #speaker.ChangeFrequency(50)
-    speaker.stop()
-    time.sleep(break_sec)
-    #speaker.start(50)
-
-  speaker.stop()
-
-
-HappyBirthday = [
-  ('5', 0.5), ('5', 0.5), ('6', 1), ('5', 1), ('1^', 1), ('7', 2), 
-  ('5', 0.5), ('5', 0.5), ('6', 1), ('5', 1), ('2^', 1), ('1^', 2),
-  ('5', 0.5), ('5', 0.5), ('5^', 1), ('3^', 1), ('1^', 1), ('7', 1), ('6', 2),
-  ('0', 2),
-  ('4^', 0.5), ('4^', 0.5), ('3^', 1), ('1^', 1), ('2^', 1), ('1^', 2)]
-
-TestSong = [
-  ('1', 1), ('1', 1), ('2', 0.5), ('2', 0.5)]
-
-test(p, HappyBirthday, 200)
-
-GPIO.cleanup()
-"""
-
-
-
-
-
-
-
-
-
-
